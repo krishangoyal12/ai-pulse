@@ -16,3 +16,12 @@ LLM_API_URL = os.getenv("LLM_API_URL", "")
 LLM_API_KEY = os.getenv("LLM_API_KEY", "")
 LLM_MODEL = os.getenv("LLM_MODEL", "")
 TOKEN_HOURS = 12
+
+_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+if _origins_env:
+    ALLOWED_ORIGINS = [o.strip() for o in _origins_env.split(",") if o.strip()]
+else:
+    ALLOWED_ORIGINS = [
+        "http://localhost:5173",
+    ]
+

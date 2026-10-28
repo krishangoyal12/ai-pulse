@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .config import ALLOWED_ORIGINS
 from .db import Base, engine
 from .routes import auth_routes, diagnostic, reports, dashboard
 
@@ -9,10 +10,12 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title="AI Pulse API")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 app.include_router(auth_routes.router)
 app.include_router(diagnostic.router)
