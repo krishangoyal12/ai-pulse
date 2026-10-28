@@ -5,3 +5,9 @@ __pycache__/
 *.db
 .pytest_cache/
 .venv/
+backend/.env
+frontend/.env
+*.env
+.env
+.env.*
+!.env.example

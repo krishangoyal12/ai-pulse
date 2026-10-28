@@ -110,6 +110,57 @@ def test_delete_my_data_clears_report_and_dashboard(client):
     assert report_after["level"] == "Not assessed"
 
 
+def test_dashboard_remediation_plan_and_coverage(client):
+    headers, data = login(client, "asha@northwind.test", "Northwind Logistics")
+    org_id = data["organizations"][0]["org_id"]
+
+    # Verify coverage confidence metrics on dashboard
+    dash = client.get(f"/dashboard?org_id={org_id}", headers=headers).json()
+    assert "statistical_confidence" in dash
+    assert dash["statistical_confidence"]["score_validity"] in ("Authoritative", "Directional", "Preliminary", "None")
+    assert "total_headcount" in dash
+    assert "participation_rate" in dash
+
+    # Verify executive remediation plan endpoint
+    res = client.get(f"/dashboard/remediation-plan?org_id={org_id}", headers=headers)
+    assert res.status_code == 200
+    plan = res.json()
+    assert "executive_summary" in plan
+    assert "action_playbooks" in plan
+    assert "roadmap" in plan
+    assert "phase_1_immediate_7d" in plan["roadmap"]
+    assert "phase_2_systemic_30d" in plan["roadmap"]
+    assert "phase_3_governance_90d" in plan["roadmap"]
+    # Verify articles attached to playbooks
+    if plan["action_playbooks"]:
+        assert "articles" in plan["action_playbooks"][0]
+
+
+def test_draft_diagnostic_question_endpoint(client):
+    headers, _ = login(client, "asha@northwind.test", "Northwind Logistics")
+    res = client.post(
+        "/diagnostic/draft-question",
+        json={"job_role": "engineering", "seniority": "senior", "topic": "security and review"},
+        headers=headers,
+    )
+    assert res.status_code == 200
+    data = res.json()
+    assert "text" in data
+    assert "options" in data
+    assert len(data["options"]) >= 4
+
+
+def test_employee_report_has_recommended_articles(client):
+    headers, _ = login(client, "priya@northwind.test", "Northwind Logistics")
+    rep = client.get("/reports/me", headers=headers).json()
+    assert "recommended_articles" in rep
+    assert len(rep["recommended_articles"]) >= 1
+    assert "url" in rep["recommended_articles"][0]
+    assert "source" in rep["recommended_articles"][0]
+
+
+
+
 
 
 

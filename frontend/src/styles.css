@@ -59,6 +59,43 @@ button:disabled {
   background: #912018;
 }
 
+/* Loading Spinners */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+
+.spinner-dark {
+  border: 2px solid #eaecf0;
+  border-top-color: #3f2a71;
+  width: 24px;
+  height: 24px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 14px;
+  color: #475467;
+  font-size: 14px;
+}
+
+
 input, textarea, select {
   width: 100%;
   padding: 10px 12px;
@@ -236,3 +273,153 @@ input:focus, textarea:focus, select:focus {
   padding: 4px 10px;
   border-radius: 12px;
 }
+
+/* Executive Confidence & Coverage Banner */
+.confidence-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: #f8f9fc;
+  border-left: 4px solid #3f2a71;
+}
+
+.confidence-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.confidence-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Nudge Button */
+.btn-nudge {
+  background: transparent;
+  color: #3f2a71;
+  border: 1px solid #d0d5dd;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.btn-nudge:hover {
+  background: #f4f3ff;
+  border-color: #3f2a71;
+}
+
+/* Modal Overlay & Card */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(16, 24, 40, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 24px -4px rgba(16, 24, 40, 0.2);
+  padding: 28px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #eaecf0;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.plan-section {
+  margin-bottom: 24px;
+}
+
+.plan-section h4 {
+  margin: 0 0 10px 0;
+  color: #1d2939;
+  font-size: 16px;
+}
+
+.playbook-card {
+  background: #fafafb;
+  border: 1px solid #eaecf0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.playbook-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.severity-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.severity-critical {
+  background: #fee4e2;
+  color: #b42318;
+}
+
+.severity-high {
+  background: #fef0c7;
+  color: #b54708;
+}
+
+.severity-medium {
+  background: #f2f4f7;
+  color: #344054;
+}
+
+.roadmap-phase {
+  background: #fdfcff;
+  border-left: 3px solid #3f2a71;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Print Styling */
+@media print {
+  .modal-overlay {
+    position: static;
+    background: none;
+    padding: 0;
+  }
+  .modal-content {
+    max-height: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .no-print, button {
+    display: none !important;
+  }
+}
+

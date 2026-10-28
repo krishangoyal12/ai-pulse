@@ -32,7 +32,17 @@ export default function Report({ onRetake }) {
     }
   }
 
-  if (!report) return <p>Loading…</p>;
+  if (!report) {
+    return (
+      <div className="card">
+        <div className="loading-container">
+          <div className="spinner spinner-dark"></div>
+          <div>Loading your AI maturity report…</div>
+        </div>
+      </div>
+    );
+  }
+
 
   if (report.answered === 0) {
     return (
@@ -81,6 +91,41 @@ export default function Report({ onRetake }) {
           <li key={s}>{s}</li>
         ))}
       </ul>
+
+      {report.recommended_articles && report.recommended_articles.length > 0 && (
+        <div style={{ marginTop: "20px" }}>
+          <h3 style={{ margin: "0 0 10px 0" }}>📖 Recommended Articles & Remediation Guides</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            {report.recommended_articles.map((art, idx) => (
+              <a
+                key={idx}
+                href={art.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "10px 14px",
+                  background: "#f8f9fc",
+                  border: "1px solid #eaecf0",
+                  borderRadius: "8px",
+                  textDecoration: "none",
+                  color: "#3f2a71",
+                  fontSize: "13px",
+                  fontWeight: 500,
+                }}
+              >
+                <span>{art.title}</span>
+                <span style={{ fontSize: "11px", color: "#667085", background: "#fff", padding: "2px 8px", borderRadius: "10px", border: "1px solid #d0d5dd" }}>
+                  {art.source} ↗
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
 
       <hr style={{ margin: "24px 0", borderColor: "#eaecf0", borderStyle: "solid" }} />
 
