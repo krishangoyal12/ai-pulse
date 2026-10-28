@@ -10,9 +10,45 @@ export default function App() {
   const [session, setSession] = useState(null);
   const [org, setOrg] = useState(null);
 
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setSession(null);
+    setOrg(null);
+    setStep("login");
+  }
+
+  function handleSwitchOrg() {
+    setOrg(null);
+    setStep("org");
+  }
+
   return (
     <div className="wrap">
-      <h1>AI Pulse</h1>
+      <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+        <h1 style={{ margin: 0 }}>AI Pulse</h1>
+        {session && (
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <span style={{ fontSize: "14px" }}>
+              <b>{session.name}</b> {org && <span style={{ color: "#667085" }}>({org.org_name})</span>}
+            </span>
+            {session.organizations && session.organizations.length > 1 && (
+              <button
+                style={{ background: "#e9ecef", color: "#333", padding: "6px 12px", fontSize: "13px" }}
+                onClick={handleSwitchOrg}
+              >
+                Switch Org
+              </button>
+            )}
+            <button
+              style={{ background: "#e9ecef", color: "#333", padding: "6px 12px", fontSize: "13px" }}
+              onClick={handleLogout}
+            >
+              Log Out
+            </button>
+          </div>
+        )}
+      </header>
+
       {step === "login" && (
         <Login onDone={(s) => { setSession(s); setStep("org"); }} />
       )}
@@ -23,8 +59,9 @@ export default function App() {
         />
       )}
       {step === "diagnostic" && <Diagnostic onDone={() => setStep("report")} />}
-      {step === "report" && <Report />}
+      {step === "report" && <Report onRetake={() => setStep("diagnostic")} />}
       {step === "dashboard" && <Dashboard org={org} />}
     </div>
   );
 }
+

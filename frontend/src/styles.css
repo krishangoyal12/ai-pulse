@@ -1,6 +1,238 @@
-body { font-family: system-ui, sans-serif; margin: 0; background: #f6f7fb; color: #1d2433; }
-.wrap { max-width: 760px; margin: 40px auto; padding: 0 16px; }
-.card { background: #fff; border-radius: 10px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 16px; }
-button { background: #3f2a71; color: #fff; border: 0; padding: 10px 16px; border-radius: 6px; cursor: pointer; }
-input, textarea, select { width: 100%; padding: 8px; margin: 6px 0 14px; box-sizing: border-box; }
-.error { color: #b42318; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  background: #f6f7fb;
+  color: #1d2433;
+}
+
+.wrap {
+  max-width: 900px;
+  margin: 36px auto;
+  padding: 0 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.08);
+  margin-bottom: 20px;
+  border: 1px solid #eaecf0;
+}
+
+button {
+  background: #3f2a71;
+  color: #fff;
+  border: 0;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: opacity 0.15s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #f2f4f7;
+  color: #344054;
+}
+
+.btn-secondary:hover {
+  background: #e4e7ec;
+}
+
+.btn-danger {
+  background: #b42318;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #912018;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 6px 0 14px;
+  box-sizing: border-box;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #1d2433;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #3f2a71;
+  box-shadow: 0 0 0 3px rgba(63, 42, 113, 0.12);
+}
+
+.error {
+  color: #b42318;
+  font-size: 14px;
+}
+
+.success-banner {
+  background: #ecfdf3;
+  color: #027a48;
+  border: 1px solid #a6f4c5;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* KPI Stat Cards Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #fcfcfd;
+  border: 1px solid #eaecf0;
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.stat-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #667085;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: #101828;
+}
+
+.stat-sub {
+  font-size: 12px;
+  color: #667085;
+  margin-top: 4px;
+}
+
+/* Dashboard Table */
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.dash-table th {
+  background: #f9fafb;
+  color: #475467;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.dash-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f2f4f7;
+  color: #344054;
+}
+
+.dash-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dash-table tr:hover td {
+  background: #fbfcfe;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-leader {
+  background: #ecfdf3;
+  color: #027a48;
+}
+
+.badge-practitioner {
+  background: #eff8ff;
+  color: #175cd3;
+}
+
+.badge-exploring {
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.badge-beginner {
+  background: #f4f3ff;
+  color: #5925dc;
+}
+
+.badge-not-assessed {
+  background: #f2f4f7;
+  color: #475467;
+}
+
+.badge-privacy {
+  background: #fef3f2;
+  color: #b42318;
+  font-size: 11px;
+  font-weight: 500;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* Risk Alert Cards */
+.risk-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.risk-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fffbfa;
+  border: 1px solid #fee4e2;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.risk-name {
+  font-weight: 500;
+  color: #b42318;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.risk-count {
+  background: #fee4e2;
+  color: #b42318;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
